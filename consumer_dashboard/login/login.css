@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    
+    /* Background Image Fix */
+    background: url('car.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Modern Login Box */
+.login-container {
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    padding: 25px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border-radius: 12px;
+    backdrop-filter: blur(10px); /* Glassmorphism Effect */
+    width: 250px; /* Adjust width */
+}
+
+/* Input Fields */
+input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid black;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Input Focus Effect */
+input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Login Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #28a745, #218838);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Hover Effect */
+button:hover {
+    background: linear-gradient(to right, #218838, #1e7e34);
+}
+
+/* Error Message */
+#error-msg {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
