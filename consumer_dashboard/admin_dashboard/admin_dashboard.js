@@ -127,16 +127,38 @@ function renderUsers() {
 
   users.forEach(user => {
     const tr = document.createElement('tr');
+
+    // Create table cells for user data
     tr.innerHTML = `
       <td>${user.id}</td>
       <td>${user.name}</td>
       <td>${user.email}</td>
       <td>${user.role}</td>
-      <td>
-        <button onclick="openEditModal('${user.id}')">Edit</button>
-        <button onclick="confirmDeleteUser('${user.id}')">Delete</button>
-      </td>
     `;
+
+    // Create actions (buttons) cell
+    const tdActions = document.createElement('td');
+
+    // Create the Edit button
+    const editBtn = document.createElement('button');
+    editBtn.textContent = 'Edit';
+    editBtn.classList.add('btn-edit');
+    editBtn.onclick = () => openEditModal(user.id);
+
+    // Create the Delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.classList.add('btn-delete');
+    deleteBtn.onclick = () => confirmDeleteUser(user.id);
+
+    // Add buttons to the actions cell
+    tdActions.appendChild(editBtn);
+    tdActions.appendChild(deleteBtn);
+
+    // Append actions cell to the row
+    tr.appendChild(tdActions);
+
+    // Append the row to the table body
     tbody.appendChild(tr);
   });
 }
@@ -183,6 +205,7 @@ document.getElementById('editUserForm').addEventListener('submit', function (e) 
   renderUsers();
   closeEditModal();
 });
+
 
 // ---------------------- Payments -----------------------
 function renderPayments() {
@@ -239,20 +262,46 @@ function renderBookings() {
 
   data.forEach(booking => {
     const row = document.createElement('tr');
+
     row.innerHTML = `
       <td>${booking.bookingId}</td>
       <td>${booking.user}</td>
       <td>${booking.parkingArea}</td>
       <td>${booking.slot}</td>
       <td>${booking.status}</td>
-      <td>
-        <button onclick="handleBookingAction(this, 'Approve')">Approve</button>
-        <button onclick="handleBookingAction(this, 'Cancel')">Cancel</button>
-      </td>
     `;
+
+    // Create a new <td> for buttons
+    const actionTd = document.createElement('td');
+
+    // Create Approve button
+    const approveBtn = document.createElement('button');
+    approveBtn.textContent = 'Approve';
+    approveBtn.classList.add('btn-approve');
+    approveBtn.onclick = function () {
+      handleBookingAction(this, 'Approve');
+    };
+
+    // Create Cancel button
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.classList.add('btn-cancel');
+    cancelBtn.onclick = function () {
+      handleBookingAction(this, 'Cancel');
+    };
+
+    // Append buttons to <td>
+    actionTd.appendChild(approveBtn);
+    actionTd.appendChild(cancelBtn);
+
+    // Append <td> to row
+    row.appendChild(actionTd);
+
+    // Append row to table body
     tbody.appendChild(row);
   });
 }
+
 //-----------------------Report---------------------
 // Sample reports data
 const sampleReports = [
@@ -376,21 +425,6 @@ function removeSlot(slotId) {
 // Initial render of slots
 renderSlots();
 
-
-// ---------------------- Map -----------------------
-
-function initMap() {
-  const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 40.748817, lng: -73.985428 },
-    zoom: 13
-  });
-
-  new google.maps.Marker({
-    position: { lat: 40.748817, lng: -73.985428 },
-    map: map,
-    title: "Parking Area"
-  });
-}
 
 // Handle all .close-btn elements
 document.querySelectorAll(".close-btn").forEach(btn => {

@@ -179,9 +179,6 @@ html, body {
     padding: 0;
 }
 
-#map-container {
-    height: 100%; /* Ensure the parent container takes up full height */
-}
 
 #mallMap {
     width: 100%; 

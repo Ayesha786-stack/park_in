@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
 function initializePayment() {
     let totalPrice = localStorage.getItem("totalPrice");
 
+    // 🪵 Debug log to see what's stored
+    console.log("Total price in storage:", totalPrice);
+
+
     if (!totalPrice) {
         console.warn("⚠ No total price found in localStorage. Setting default value.");
         totalPrice = 0; // Default value to avoid "null"

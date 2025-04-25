@@ -15,6 +15,7 @@
     </div>
     <div class="topnav-right">
       <a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i> Logout</a>
+      <a href="#" onclick="showContent('viewFeedback')"><i class="material-icons">feedback</i> Feedback</a>
     </div>
   </div>
 
@@ -29,7 +30,6 @@
     <a href="#" onclick="showContent('manageParkingAreas')"><i class="material-icons">place</i> Manage Parking Areas</a>
     <a href="#" onclick="showContent('notifications')"><i class="material-icons">notifications</i> Notifications</a>
     <a href="#" onclick="showContent('manageWaitlist')"><i class="material-icons">hourglass_empty</i> Waitlist</a>
-    <a href="#" onclick="showContent('viewFeedback')"><i class="material-icons">feedback</i> Feedback</a>
   </div>
 
   <!-- Main Content -->
@@ -146,7 +146,6 @@
         <button onclick="addParkingArea()">Add</button>
         <button onclick="closeAddParkingAreaForm()">Cancel</button>
       </div>
-      <div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
     </div>
 
     <!-- Notifications Section -->
@@ -227,8 +226,8 @@
       </select>
 
       <div class="modal-buttons">
-        <button type="submit">Update</button>
-        <button type="button" onclick="closeEditModal()">Cancel</button>
+        <button type="submit" class="btn-update">Update</button>
+        <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
       </div>
     </form>
   </div>
@@ -261,8 +260,5 @@
 
 
   <script src="admin_dashboard.js"></script>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAckNRuScnU4Q7AdXUsyUf3P52VhMVF4Ug&callback=initMap">
-  </script>
 </body>
 </html>

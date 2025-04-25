@@ -17,7 +17,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: #222;
-    height: 62px;
+    height: 52px;
     padding: 20px;
     color: white;
 }
@@ -61,9 +61,11 @@ body {
     height: 100vh;
     background-color: #1a1a1a;
     position: fixed;
-    top: 90px;
+    top: 92px;
     left: 0;
     padding-top: 20px;
+    height: 100vh;
+  overflow-y: auto;
 }
 
 .sidebar a {
@@ -86,7 +88,7 @@ body {
 
 /* Main Content */
 .main-content {
-    margin-left: 270px;
+    margin-left: 250px;
     padding: 20px;
 }
 
@@ -197,6 +199,64 @@ th {
   .cancel-btn:hover {
     background-color: #bbb;
   }
+
+.btn-approve {
+  background-color: #4CAF50; /* green */
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 8px; /* spacing between buttons */
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-cancel {
+  background-color: #f44336; /* red */
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+/* Edit Button Style */
+.btn-edit {
+  background-color: #2196F3; /* Blue */
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 8px; /* Space between buttons */
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-update {
+  background-color: #4CAF50; /* Green for Update */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* Hover Effects */
+.btn-update:hover {
+  background-color: #45a049;
+}
+
+/* Delete Button Style */
+.btn-delete {
+  background-color: #e91e63; /* Pink/Red */
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+
   
   
 
@@ -359,5 +419,11 @@ th {
 .slot button:hover {
   background-color: #0056b3;
 }
+.feedback-section {
+  display: block;
+  position: relative; 
+  padding: 10px;
+}
+
 
   

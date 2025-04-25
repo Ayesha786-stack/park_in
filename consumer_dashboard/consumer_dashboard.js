@@ -233,31 +233,6 @@ function updateNotificationsDisplay() {
     }
 }
 
-// Google Maps
-let map;
-function initMap() {
-    const mallLocation = { lat: 24.8607, lng: 67.0011 };
-
-    map = new google.maps.Map(document.getElementById("mallMap"), {
-        center: mallLocation,
-        zoom: 15,
-    });
-
-    map.addListener("click", (e) => {
-        addMarker(e.latLng);
-    });
-}
-
-function addMarker(location) {
-    const marker = new google.maps.Marker({
-        position: location,
-        map: map,
-        draggable: true,
-        title: "New Parking Area",
-    });
-
-    console.log("Lat:", location.lat(), "Lng:", location.lng());
-}
 
 // Feedback
 function giveFeedback(bookingId) {
