@@ -12,6 +12,10 @@ header {
     color: white;
     padding: 15px;
     font-size: 24px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contact-form {

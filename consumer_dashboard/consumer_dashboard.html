@@ -27,6 +27,8 @@
         <a href="#" onclick="showContent('waitlist')"><i class="material-icons">hourglass_empty</i> Waitlist</a>
         <a href="payment/payment.html"><i class="material-icons">credit_card</i> Payments</a>
         <a href="#" onclick="showContent('notifications')"><i class="material-icons">notifications</i> Notifications</a>
+        <a href="#" onclick="showContent('feedback')"><i class="material-icons">feedback</i> Feedback</a>
+
     </div>
 
     <!-- Main Content -->
@@ -120,6 +122,7 @@
         <p>Fee: <strong>$50</strong></p>
         <button onclick="bookParking('VIP', 50)">Book Now</button>
     </div>
+    </div>
 
 
         <div id="waitlist" class="content">
@@ -129,14 +132,21 @@
             <div id="waitlistdisplay">
                 <p>Users currently waiting for a slot will be displayed here.</p>
             </div>
-        </div>
+            </div>
+        
 
 
         <div id="notifications" class="content">
             <h2>Notifications</h2>
             <div id="notification-list"></div>
         </div>
-    </div>
+
+        <div id="feedback" class="content">
+            <h2>Feedback</h2>
+            <button onclick="openFeedback()">Give Feedback</button>
+        </div>
+        
+    
 
     <!-- Feedback Modal -->
     <div id="feedbackModal" class="modal">

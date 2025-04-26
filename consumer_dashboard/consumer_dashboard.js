@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     initializeApp();
 
@@ -136,7 +137,6 @@ function renderBookings(bookings) {
             <td>${b.bookingDate}</td>
             <td>${b.status}</td>
             <td>
-                <button onclick="giveFeedback('${b.id}')">Feedback</button>
                 <button onclick="openBookingForm('${b.slot}', 100)">Book Again</button>
             </td>
         `;
@@ -232,33 +232,44 @@ function updateNotificationsDisplay() {
             .join('');
     }
 }
+//--------------------feedback-------------------
 
-
-// Feedback
-function giveFeedback(bookingId) {
-    document.getElementById("feedbackModal").style.display = "block";
+function openFeedback() {
+    document.getElementById('feedbackModal').style.display = 'block';
 }
 
 function closeFeedback() {
-    document.getElementById("feedbackModal").style.display = "none";
+    document.getElementById('feedbackModal').style.display = 'none';
 }
 
-document.getElementById("feedbackForm")?.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const rating = document.getElementById("rating").value;
-    const comment = document.getElementById("comments").value.trim();
-
-    if (!rating || !comment) {
-        alert("Please provide a rating and comments.");
-        return;
+// Optional: Close modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('feedbackModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
     }
+}
 
-    console.log("Feedback submitted:", { rating, comment });
-    alert("Thank you for your feedback!");
-    closeFeedback();
-    this.reset();
+// Handle Feedback Form Submit
+document.addEventListener('DOMContentLoaded', function () {
+    const feedbackForm = document.getElementById('feedbackForm');
+    feedbackForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const rating = document.getElementById('rating').value;
+        const comments = document.getElementById('comments').value;
+
+        console.log("Feedback submitted:", rating, comments);
+
+        // Show confirmation
+        alert("Thank you for your feedback!");
+
+        // Reset and close
+        feedbackForm.reset();
+        closeFeedback();
+    });
 });
+
 
 // Logout
 function logout() {
