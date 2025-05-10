@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Payment</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+    <a href="../consumer_dashboard.html" class="back-button">← Back to Dashboard</a>
+    
+    <div class="container">
+    <form id="paymentForm">
+        <input type="hidden" id="bookingId" value="12345"> <!-- Set dynamically via JS -->
+
+        <h2>Confirm Your Parking Payment</h2>
+        <hr>
+        <p id="totalPrice">Total Price: Rs.0</p>
+        <p id="adminNumberMain">Send payment to: </p>
+
+        <div class="payment-box" onclick="selectPayment('easypaisa')">
+            <label for="easypaisa">Easypaisa</label>
+            <input type="radio" name="payment" id="easypaisa" value="easypaisa">
+        </div>
+
+        <div class="payment-box" onclick="selectPayment('jazzcash')">
+            <label for="jazzcash">JazzCash</label>
+            <input type="radio" name="payment" id="jazzcash" value="jazzcash">
+        </div>
+
+        <button class="confirm-btn" type="button" onclick="openModal()">Proceed to Payment</button>
+    </form>
+</div>
+
+
+    <!-- Modal Overlay (For background) -->
+<div class="modal-overlay" id="modalOverlay"></div>
+
+<!-- Payment Modal -->
+<div class="modal" id="paymentModal">
+    <h3>Payment Details</h3>
+    <p id="modalBookingId"></p> <!-- Added Booking ID -->
+    <p id="modalTotalPrice"></p>
+    <p id="adminNumberModal"></p>
+    <p>Upload the payment screenshot:</p>
+
+    <!-- Screenshot Upload -->
+    <input type="file" id="paymentScreenshot" accept="image/*" />
+
+    <br><br>
+
+    <!-- Checkout Button -->
+    <button id="checkoutBtn" disabled>Checkout</button>
+
+    <!-- Buttons for Modal -->
+    <button class="upload-btn" onclick="confirmPayment()">Upload & Confirm</button>
+    <button class="close-btn" onclick="closeModal()">Close</button>
+</div>
+
+
+    <script src="payment.js"></script>
+</body>
+</html>

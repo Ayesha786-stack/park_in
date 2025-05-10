@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin_dashboard.css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <div class="topnav">
+    <div class="topnav-left">
+      <img src="logo.png" alt="Logo" class="logo"/>
+    </div>
+    <div class="topnav-right">
+      <a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i> Logout</a>
+      <a href="#" onclick="showContent('viewFeedback')"><i class="material-icons">feedback</i> Feedback</a>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="#" onclick="showContent('dashboard')"><i class="material-icons">dashboard</i> Dashboard</a>
+    <a href="#" onclick="showContent('manageBookings')"><i class="material-icons">book</i> Manage Bookings</a>
+    <a href="#" onclick="showContent('manageSlots')"><i class="material-icons">local_parking</i> Manage Slots</a>
+    <a href="#" onclick="showContent('paymentRecords')"><i class="material-icons">credit_card</i> Payment Records</a>
+    <a href="#" onclick="showContent('reports')"><i class="material-icons">assessment</i> Reports</a>
+    <a href="#" onclick="showContent('manageParkingAreas')"><i class="material-icons">place</i> Manage Parking Areas</a>
+    <a href="#" onclick="showContent('notifications')"><i class="material-icons">notifications</i> Notifications</a>
+    <a href="#" onclick="showContent('manageWaitlist')"><i class="material-icons">hourglass_empty</i> Waitlist</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div id="dashboard" class="content" style="display:block">
+      <h2>Welcome, Admin!</h2>
+      <p>Use the sidebar to manage the parking system.</p>
+    </div>
+
+    <div id="manageBookings" class="content" style="display:none;">
+      <h2>Manage Bookings</h2>
+      <table id="bookingsTable">
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>User</th>
+            <th>Parking Area</th>
+            <th>Slot</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bookingTableBody">
+          <!-- Booking rows will be rendered dynamically here -->
+        </tbody>
+      </table>
+    </div>
+    
+
+    <div id="manageSlots" class="content" style="display:none;">
+      <h2>Manage Parking Slots</h2>
+      <p>Add, remove, or update parking slots.</p>
+      <div id="slotsList">
+        <!-- Dynamic Slots List will be here -->
+      </div>
+    </div>
+
+    <div id="paymentRecords" class="content" style="display:none;">
+      <h2>Payment Records</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Payment ID</th>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="paymentTableBody">
+          <!-- Payment rows will be rendered dynamically here -->
+        </tbody>
+      </table>
+    </div>
+    
+    
+    
+
+    <div id="reports" class="content" style="display:none;">
+      <h2>Reports</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Report ID</th>
+            <th>Type</th>
+            <th>Generated Date</th>
+            <th>Download</th>
+          </tr>
+        </thead>
+        <tbody id="reportsTableBody">
+          <!-- Report rows will be dynamically rendered here -->
+        </tbody>
+      </table>
+      <p id="noReportsMessage" style="display: none;">No reports available at the moment.</p>
+    </div>
+
+    <div id="manageParkingAreas" class="content" style="display:none;">
+      <h2>Manage Parking Areas</h2>
+      <table id="parkingAreasTable">
+        <thead>
+          <tr>
+            <th>Area Name</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="parkingAreasTableBody">
+          <!-- Parking area rows will be dynamically rendered here -->
+        </tbody>
+      </table>
+      <button onclick="addParkingAreaForm()">Add Parking Area</button>
+      <div id="addParkingAreaForm" style="display:none;">
+        <input id="areaName" placeholder="Parking Area Name">
+        <input id="capacity" type="number" placeholder="Capacity">
+        <button onclick="addParkingArea()">Add</button>
+        <button onclick="closeAddParkingAreaForm()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Notifications Section -->
+<div id="notifications" class="content" style="display:none;">
+  <h2>Notifications</h2>
+  <div id="notificationsList">
+    <!-- Dynamic notifications will appear here -->
+  </div>
+</div>
+
+
+    <div id="manageWaitlist" class="content" style="display:none;">
+      <h2>Manage Waitlist</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Requested Slot</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="waitlistTableBody">
+          <!-- Waitlist rows will be dynamically rendered here -->
+        </tbody>
+      </table>
+      <p id="noWaitlistMessage" style="display: none;">No waitlist requests found.</p>
+    </div>
+
+    <div id="viewFeedback" class="content" style="display:none;">
+      <h2>View Feedback</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Rating</th>
+            <th>Comment</th>
+          </tr>
+        </thead>
+        <tbody id="feedbackTableBody">
+          <!-- Feedback rows will be dynamically rendered here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+ <!-- Reusable Modal -->
+<div id="modal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle">Modal Title</h2>
+    <p id="modalMessage">Modal message goes here.</p>
+    <div id="modalFormContainer"></div> <!-- Optional input fields -->
+    <div class="modal-buttons">
+      <button class="confirm-btn" id="modalConfirmBtn">Confirm</button>
+      <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+<!-- Edit User Modal -->
+<div id="editUserModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeEditModal()">&times;</span>
+    <h3>Edit User</h3>
+    <form id="editUserForm">
+      <input type="hidden" id="editUserId" />
+
+      <label for="editUserName">Name:</label>
+      <input type="text" id="editUserName" required />
+
+      <label for="editUserEmail">Email:</label>
+      <input type="email" id="editUserEmail" required />
+
+      <label for="editUserRole">Role:</label>
+      <select id="editUserRole" required>
+        <option value="Admin">Admin</option>
+        <option value="Consumer">Consumer</option>
+      </select>
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-update">Update</button>
+        <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Modal for Payment Records -->
+<!-- Payment Modal -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2>Payment Details</h2>
+    <form id="paymentForm">
+      <label for="paymentId">Payment ID:</label>
+      <input type="text" id="paymentId" disabled>
+
+      <label for="paymentUser">User:</label>
+      <input type="text" id="paymentUser">
+
+      <label for="paymentAmount">Amount:</label>
+      <input type="text" id="paymentAmount">
+
+      <label for="paymentStatus">Status:</label>
+      <input type="text" id="paymentStatus">
+
+      <button type="button" id="saveChangesBtn">Save Changes</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+  <script src="admin_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help and FAQs</title>
+    <link rel="stylesheet" href="help and faqs.css">
+</head>
+<body>
+    <h1>Help and FAQs</h1>
+    <section id="faqs">
+        <div class="faq">
+            <div class="question" onclick="toggleAnswer(this)">
+                <img src="parking_icon.jpg" alt="Parking Icon" class="faq-icon"> How do I park my car? <span class="arrow">▼</span>
+            </div>
+            <p class="answer">To park your car, simply log in to the web app, check slot availability, select a parking spot, confirm your booking, and make a payment if required. The system provides real-time slot updates and Google Maps navigation to guide you to your reserved spot.</p>
+        </div>
+        <div class="faq">
+            <div class="question" onclick="toggleAnswer(this)">
+                <img src="rate_icon.jpg" alt="Rate Icon" class="faq-icon"> What are the parking rates? <span class="arrow">▼</span>
+            </div>
+            <p class="answer">Parking rates vary based on location, duration, and vehicle. You can check the specific rates for your selected parking area within the app before booking. The system ensures transparent pricing with no hidden charges.</p>
+        </div>
+        <div class="faq">
+            <div class="question" onclick="toggleAnswer(this)">
+                <img src="general_payment_icon.jpg" alt="Payment Icon" class="faq-icon"> How can I pay for parking? <span class="arrow">▼</span>
+            </div>
+            <p class="answer">You can pay for parking through credit/debit cards, online wallets (PayPal, Google Pay), and UPI. After a successful payment, you will receive a confirmation notification via SMS, email, or app notification, ensuring a seamless transaction experience.</p>
+        </div>
+    </section>
+
+    <script>
+        function toggleAnswer(element) {
+            let answer = element.nextElementSibling;
+            let arrow = element.querySelector(".arrow");
+            
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+                element.classList.remove("open");
+            } else {
+                answer.style.display = "block";
+                element.classList.add("open");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer Dashboard</title>
+    <link rel="stylesheet" href="consumer_dashboard.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="topnav">
+        <div class="topnav-left">
+            <img src="logo.png" alt="Logo" class="logo">
+        </div>
+        <div class="topnav-right">
+            <a href="profile/profile.html"><i class="material-icons">person</i> Profile</a>
+            <a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i> Logout</a>
+        </div>
+    </div>
+    <!-- Hamburger Menu for Small Screens -->
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <!-- Sidebar -->
+    <div  class="sidebar">
+        <a href="#" onclick="showContent('myBookings')"><i class="material-icons">book</i> My Bookings</a>
+        <a href="#" onclick="showContent('checkSlots')"><i class="material-icons">search</i> Check Slots</a>
+        <a href="#" onclick="showContent('parkingAreas')"><i class="material-icons">local_parking</i> Parking Areas</a>
+        <a href="#" onclick="showContent('waitlist')"><i class="material-icons">hourglass_empty</i> Waitlist</a>
+        <a href="payment/payment.html"><i class="material-icons">credit_card</i> Payments</a>
+        <a href="#" onclick="showContent('notifications')"><i class="material-icons">notifications</i> Notifications</a>
+        <a href="#" onclick="showContent('feedback')"><i class="material-icons">feedback</i> Feedback</a>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div id="welcome" class="content">
+            <h2>Welcome, Consumer!</h2>
+            <p>Use the sidebar to navigate through your dashboard features.</p>
+        </div>
+
+        <div id="myBookings" class="content">
+            <h2>My Bookings</h2>
+            <!-- Check-in Timer Section -->
+    <div id="booking-section">
+      <div id="booking-status">Booked - Awaiting Check-In</div>
+      <div id="checkin-timer">
+        <div id="countdown-container">
+          <span id="countdown-label">Time left to check in:</span>
+          <span id="countdown">15:00</span>
+        </div>
+      </div>      
+    </div>
+          
+            <div class="tabs">
+              <button onclick="showTab('upcoming')">Upcoming</button>
+              <button onclick="showTab('active')">Active</button>
+              <button onclick="showTab('history')">History</button>
+              <button onclick="showTab('cancelled')">Cancelled</button>
+            </div>
+          
+            <div id="loadingIndicator" style="display: none;">Loading...</div>
+          
+            <div id="upcoming" class="tab-content">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Parking Area</th>
+                    <th>Car Model</th>
+                    <th>Slot</th>
+                    <th>Time</th>
+                    <th>Booking Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="upcomingBody"></tbody>
+              </table>
+            </div>
+          
+            <div id="active" class="tab-content" style="display:none;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Parking Area</th>
+                    <th>Car Model</th>
+                    <th>Slot</th>
+                    <th>Time</th>
+                    <th>Booking Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="activeBody"></tbody>
+              </table>
+            </div>
+            
+            
+          
+            <div id="history" class="tab-content" style="display:none;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Parking Area</th>
+                    <th>Car Model</th>
+                    <th>Slot</th>
+                    <th>Time</th>
+                    <th>Booking Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+              </table>
+            </div>
+            <div id="cancelled" class="tab-content" style="display:none;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Booking ID</th>
+                      <th>Parking Area</th>
+                      <th>Car Model</th>
+                      <th>Slot</th>
+                      <th>Time</th>
+                      <th>Booking Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cancelledBody"></tbody>
+                </table>
+              </div>
+          </div>
+          
+        
+
+        <div id="checkSlots" class="content">
+            <h2>Check Slots</h2>
+            <p>Available slots:</p>
+            <table>
+                <tr>
+                    <th>Slot ID</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>A1</td>
+                    <td>Available</td>
+                    <td><button class="book-btn" onclick="openBookingForm('A1')">Book Now</button></td>
+                </tr>
+                <tr>
+                    <td>B5</td>
+                    <td>Available</td>
+                    <td><button class="book-btn" onclick="openBookingForm('B5')">Book Now</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="bookingForm" class="content" style="display: none;">
+            <input type="text" id="selectedSlot" hidden>
+
+            <h2>Book a Slot</h2>
+            <form id="bookingFormDetails">
+                <label for="carModel">Car Model:</label>
+                <input type="text" id="carModel" required>
+            
+                <label for="startTime">Start Time:</label>
+                <input type="time" id="startTime" required>
+                <label for="endTime">End Time:</label>
+                <input type="time" id="endTime" required>
+            
+                <button type="submit">Confirm Booking</button>
+                <p id="selectedSlotInfo" style="margin-top:10px; color: green;"></p>
+            </form>
+            
+            
+
+        </div>
+
+        <!-- FIXED: Parking Areas Section -->
+<div id="parkingAreas" class="content">
+    <h2>Parking Areas</h2>
+
+    <div class="parking-card basement">
+        <h3>Basement Parking</h3>
+        <p>Secure indoor parking with CCTV monitoring.</p>
+        <p>Status: <strong>Available</strong></p>
+        <p>Fee: <strong>$20</strong></p>
+        <button onclick="bookParking('Basement', 20)">Book Now</button>
+    </div>
+
+    <div class="parking-card open-area">
+        <h3>Open Area Parking</h3>
+        <p>Spacious outdoor parking with easy access.</p>
+        <p>Status: <strong>Full</strong></p>
+    </div>
+
+    <div class="parking-card vip">
+        <h3>VIP Parking</h3>
+        <p>Exclusive parking slots with premium service.</p>
+        <p>Status: <strong>Available</strong></p>
+        <p>Fee: <strong>$50</strong></p>
+        <button onclick="bookParking('VIP', 50)">Book Now</button>
+    </div>
+    </div>
+
+
+    <div id="waitlist" class="content">
+        <h2>Waitlist</h2>
+        <label for="waitlistArea">Select Parking Area:</label>
+    <select id="waitlistArea">
+        <option value="">-- Select Area --</option>
+       
+            <option value="Area 1">Basement parking</option>
+            <option value="Area 2">Open Area parking</option>
+            <option value="Area 3">VIP parking</option>
+        </select>
+        <br>
+        <input type="text" id="waitlistName" placeholder="Enter your name">
+        <input type="time" id="waitlistStartTime" placeholder="Start time">
+        <input type="time" id="waitlistEndTime" placeholder="End time">
+        <button onclick="testAddToWaitlist()">Add to Waitlist</button>
+        <div id="waitlistdisplay">
+            <p>Users currently waiting for a slot will be displayed here.</p>
+        </div>
+    </div>
+    
+        
+
+
+        <div id="notifications" class="content">
+            <h2>Notifications</h2>
+            <div id="notification-list"></div>
+        </div>
+
+        <div id="feedback" class="content">
+            <h2>Feedback</h2>
+            <button onclick="openFeedback()">Give Feedback</button>
+        </div>
+        
+    
+
+        <div id="feedbackModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeFeedback()">&times;</span>
+                <h3>📝 Submit Feedback</h3>
+                <form id="feedbackForm">
+                    <!-- Rating Dropdown -->
+                    <label for="rating">Rating:</label>
+                    <select id="rating" name="rating" required>
+                        <option value="" disabled selected>Select Rating</option>
+                        <option value="5">Excellent</option>
+                        <option value="4">Good</option>
+                        <option value="3">Average</option>
+                        <option value="2">Poor</option>
+                        <option value="1">Terrible</option>
+                    </select>
+        
+                    <!-- Comments Section -->
+                    <label for="comments">Comments:</label>
+                    <textarea id="comments" name="comments" rows="4" placeholder="Your thoughts..." required></textarea>
+        
+                    <!-- Submit Button -->
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Waitlist Modal -->
+<div id="waitlistModal" class="modal">
+  <div class="modal-content">
+    <h3>Check-In Missed</h3>
+    <p>Your booking has expired. Would you like to join the waitlist?</p>
+    <div class="modal-buttons">
+      <button id="joinWaitlistBtn">Yes</button>
+      <button id="closeModalBtn">No</button>
+    </div>
+  </div>
+</div>
+
+        
+
+    <script src="consumer_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('car.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+    padding: 20px;
+
+}
+.container {
+    background: rgba(255, 255, 255, 0.2); 
+    padding: 25px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); 
+    text-align: center;
+    border-radius: 12px;
+    backdrop-filter: blur(10px); /* Glassmorphism Effect */
+    width: 50%; /* Adjust width as needed */
+    max-width: 400px;
+    color: black; /* Ensures text is visible */
+    position: absolute;  
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle glass border */ 
+}
+.back-button {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
+    color: white; /* White text for contrast */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    backdrop-filter: blur(5px); /* Glassmorphism effect */
+    position: absolute;
+    top: 20px; /* Adjust vertical positioning */
+    left: 20px; /* Adjust horizontal positioning */
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.6);
+    color: black;
+}
+h2,h3, p {
+    color: black; /* Ensures readability */
+}
+h2 {
+    color:brown;
+    text-align: center;
+}
+
+.payment-box {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid brown;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.confirm-btn {
+    background:brown;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Modal Styling */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px gray;
+    text-align: center;
+}
+
+.upload-btn {
+    background: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.close-btn {
+    background: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}

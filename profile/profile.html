@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <h1>My Profile</h1>
+        <!-- Logout Button -->
+        <button class="logout-btn" onclick="logout()">
+            <i class="material-icons">exit_to_app</i> Logout
+        </button>
+    </div>
+
+    <div class="profile-container">
+        <img src="avatar.jpg" alt="Profile Picture">
+        <h2>John Doe</h2>
+        <p><i class="material-icons">email</i> johndoe@example.com</p>
+        <p><i class="material-icons">phone</i> +123 456 7890</p>
+        <p><i class="material-icons">calendar_today</i> Member Since: January 2024</p>
+    </div>
+
+    <!-- User Bookings Section -->
+    <div class="user-bookings">
+        <h3>My Parking Bookings</h3>
+        <div class="booking-details">
+            <!-- Dynamic bookings will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Available Parking Slots Section -->
+    <div class="available-slots">
+        <h3>Available Parking Slots</h3>
+        <div class="slots-list">
+            <!-- Dynamic slots will be inserted here -->
+        </div>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>
