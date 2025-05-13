@@ -1,99 +1,73 @@
-document.addEventListener("DOMContentLoaded", function () {
-    initializePayment();
-});
+let selectedPayment = null;
 
-function initializePayment() {
-    let totalPrice = localStorage.getItem("totalPrice");
-
-    // 🪵 Debug log to see what's stored
-    console.log("Total price in storage:", totalPrice);
-
-
-    if (!totalPrice) {
-        console.warn("⚠ No total price found in localStorage. Setting default value.");
-        totalPrice = 0; // Default value to avoid "null"
-        localStorage.setItem("totalPrice", totalPrice); // Store it
-    }
-
-    totalPrice = parseFloat(totalPrice); // Convert to number
-    let priceElement = document.getElementById("totalPrice");
-    
-    if (priceElement) {
-        priceElement.innerText = `Total Price: Rs.${totalPrice}`;
-    }
-}
-
-
-// ✅ Function to select a payment method (Improved UI effect)
 function selectPayment(method) {
-    let paymentInputs = document.querySelectorAll('input[name="payment"]');
-    
-    // Deselect all options before selecting the clicked one
-    paymentInputs.forEach(input => input.checked = false);
+    selectedPayment = method;
+    document.getElementById("easypaisa").checked = method === "easypaisa";
+    document.getElementById("jazzcash").checked = method === "jazzcash";
 
-    let selectedInput = document.getElementById(method);
-    if (selectedInput) {
-        selectedInput.checked = true;
-    }
+    const adminNumber = method === "easypaisa" 
+        ? "0345-XXXXXXX (Easypaisa)" 
+        : "0300-XXXXXXX (JazzCash)";
+    
+    document.getElementById("adminNumberMain").innerText = `Send payment to: ${adminNumber}`;
+    document.getElementById("adminNumberModal").innerText = `Send payment to: ${adminNumber}`;
 }
 
-// ✅ Function to open the payment modal
 function openModal() {
-    let selectedPayment = document.querySelector('input[name="payment"]:checked');
     if (!selectedPayment) {
         alert("Please select a payment method.");
         return;
     }
 
-    let totalPrice = localStorage.getItem("totalPrice");
-    if (!totalPrice) {
-        alert("Total price not found! Please book again.");
+    const bookingData = JSON.parse(localStorage.getItem("bookingData"));
+    if (!bookingData) {
+        alert("No booking data found.");
         return;
     }
 
-    totalPrice = parseFloat(totalPrice); // Ensure numeric conversion
-    let adminNumber = selectedPayment.value === "easypaisa" ? "0345-XXXXXXX" : "0300-XXXXXXX";
+    // Set modal content
+    document.getElementById("modalBookingId").innerText = `Booking ID: ${bookingData.bookingId}`;
+    document.getElementById("modalTotalPrice").innerText = `Total Price: Rs. ${bookingData.totalPrice}`;
 
-    let priceElement = document.getElementById("modalTotalPrice");
-    let adminElement = document.getElementById("adminNumberModal");
-
-    if (!priceElement || !adminElement) {
-        alert("Error: Payment details not found. Try again!");
-        return;
-    }
-
-    priceElement.innerText = `Total Price: Rs.${totalPrice}`;
-    adminElement.innerText = `Send payment to: ${adminNumber}`;
-
-    document.getElementById("paymentModal").style.display = "block";
     document.getElementById("modalOverlay").style.display = "block";
+    document.getElementById("paymentModal").style.display = "block";
+
+    // Enable checkout when file is selected
+    const screenshotInput = document.getElementById("paymentScreenshot");
+    screenshotInput.value = ""; // Reset input
+    screenshotInput.onchange = function () {
+        document.getElementById("checkoutBtn").disabled = !screenshotInput.files.length;
+    };
 }
 
-// ✅ Function to close the modal
 function closeModal() {
-    document.getElementById("paymentModal").style.display = "none";
     document.getElementById("modalOverlay").style.display = "none";
+    document.getElementById("paymentModal").style.display = "none";
 }
 
-// ✅ Function to confirm payment
 function confirmPayment() {
-    let screenshotInput = document.getElementById("paymentScreenshot");
-
-    // Check if a file is uploaded
-    if (screenshotInput.files.length === 0) {
-        alert("Please upload the payment screenshot.");
+    const screenshotInput = document.getElementById("paymentScreenshot");
+    if (!screenshotInput.files.length) {
+        alert("Please upload a payment screenshot.");
         return;
     }
 
-    // Validate file type (only image formats allowed)
-    let file = screenshotInput.files[0];
-    let allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
-    if (!allowedTypes.includes(file.type)) {
-        alert("Invalid file format! Please upload a PNG or JPG image.");
-        return;
-    }
-
-    alert("Payment confirmed! Redirecting to dashboard...");
-    window.location.href = "../consumer_dashboard.html"; // Adjust if needed
+    alert("Payment submitted successfully. You will receive a confirmation shortly.");
+    localStorage.removeItem("bookingData");
+    window.location.href = "../consumer_dashboard.html";
 }
 
+function initializePaymentPage() {
+    const bookingData = JSON.parse(localStorage.getItem("bookingData"));
+    if (!bookingData) {
+        document.getElementById("totalPrice").innerText = "No booking found.";
+        return;
+    }
+
+    // Set booking ID and price
+    document.getElementById("bookingId").value = bookingData.bookingId;
+    document.getElementById("totalPrice").innerText = `Total Price: Rs. ${bookingData.totalPrice}`;
+}
+
+// Call initialize on page load
+window.onload = initializePaymentPage;

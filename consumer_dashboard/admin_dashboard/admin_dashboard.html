@@ -23,7 +23,6 @@
   <div class="sidebar">
     <a href="#" onclick="showContent('dashboard')"><i class="material-icons">dashboard</i> Dashboard</a>
     <a href="#" onclick="showContent('manageBookings')"><i class="material-icons">book</i> Manage Bookings</a>
-    <a href="#" onclick="showContent('manageUsers')"><i class="material-icons">people</i> Manage Users</a>
     <a href="#" onclick="showContent('manageSlots')"><i class="material-icons">local_parking</i> Manage Slots</a>
     <a href="#" onclick="showContent('paymentRecords')"><i class="material-icons">credit_card</i> Payment Records</a>
     <a href="#" onclick="showContent('reports')"><i class="material-icons">assessment</i> Reports</a>
@@ -58,23 +57,6 @@
       </table>
     </div>
     
-    <div id="manageUsers" class="content" style="display:none;">
-      <h2>Manage Users</h2>
-      <table id="usersTable">
-        <thead>
-          <tr>
-            <th>User ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="usersTableBody">
-          <!-- User rows will be rendered dynamically here -->
-        </tbody>
-      </table>
-    </div>
 
     <div id="manageSlots" class="content" style="display:none;">
       <h2>Manage Parking Slots</h2>

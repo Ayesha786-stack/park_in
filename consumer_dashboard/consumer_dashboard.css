@@ -82,6 +82,8 @@ body {
     margin-right: 10px;
 }
 
+
+
 /* Main Content */
 .main-content {
     margin-left: 270px;
@@ -94,6 +96,47 @@ body {
 .content {
     display: none;
 }
+/* Style for the Hamburger Menu */
+.hamburger-menu {
+    display: none; /* Hidden by default, will be shown on small screens */
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+/* Display Hamburger Menu on Small Screens */
+@media screen and (max-width: 768px) {
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .sidebar {
+        display: none;
+        position: absolute;
+        left: -250px;
+        top: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #333;
+        transition: left 0.3s ease-in-out;
+    }
+
+    .sidebar.active {
+        display: block;
+        left: 0;
+    }
+}
+
 
   /* Table Styling */
 table {
@@ -180,14 +223,6 @@ html, body {
 }
 
 
-#mallMap {
-    width: 100%; 
-    height: 400px; 
-    min-height: 400px; 
-    display: block;
-    background-color: white; 
-    border: 2px solid black; 
-}
 
 .modal {
     display: none;
@@ -256,6 +291,180 @@ html, body {
 .feedback-btn:hover {
     background-color: #0056b3;
 }
+.booking-item button {
+    display: inline-block;
+    margin: 5px;
+}
+
+.booking-tabs {
+    margin-bottom: 20px;
+  }
+  
+  .booking-tab {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    margin-right: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .booking-tab:hover {
+    background-color: #218838;
+  }
+  
+  .booking-tab.active {
+    background-color: #1e7e34;
+    border: 2px solid white;
+  }
+  
+  .booking-table-container {
+    background-color: rgba(0, 0, 0, 0.7); /* Transparent black */
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto; /* for mobile scroll */
+  }
+  
+  .booking-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+  }
+  
+  .booking-table th, .booking-table td {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  .booking-table th {
+    background-color: #333;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .booking-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .booking-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Countdown Timer Styling */
+#countdown-container {
+    background-color: #222;
+    color: #00ff99;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
+}
+
+#countdown-label {
+    margin-right: 8px;
+    color: #fff;
+}
+#booking-section {
+    margin-bottom: 15px;
+}
+
+#booking-status {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    color:#007bff;
+    margin: 15% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  }
+  
+  .modal-buttons button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  #joinWaitlistBtn {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  #closeModalBtn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+.check-in-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7); /* optional dark overlay */
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.check-in-section .timer {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.check-in-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.check-in-buttons button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.check-in-buttons button:hover {
+    background-color: #218838;
+}
+
+
+  
 
 /* Parking Areas Styling */
 .parking-areas {
@@ -266,7 +475,7 @@ html, body {
 }
 
 .parking-card {
-    flex: 1 1 200px; /* Let it grow/shrink and have a minimum width */
+    flex: 1 1 100px; /* Let it grow/shrink and have a minimum width */
     background-color: #df5d5d;
     color: brown;
     padding: 15px;
@@ -296,4 +505,10 @@ html, body {
 
 .vip {
     border-left: 5px solid #FF0000;
+}  
+.stars {
+    display: flex;
+    gap: 5px;
 }
+
+

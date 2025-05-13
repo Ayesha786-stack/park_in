@@ -18,9 +18,16 @@
             <a href="#" onclick="logout()"><i class="material-icons">exit_to_app</i> Logout</a>
         </div>
     </div>
+    <!-- Hamburger Menu for Small Screens -->
+    <div class="hamburger-menu" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div  class="sidebar">
         <a href="#" onclick="showContent('myBookings')"><i class="material-icons">book</i> My Bookings</a>
         <a href="#" onclick="showContent('checkSlots')"><i class="material-icons">search</i> Check Slots</a>
         <a href="#" onclick="showContent('parkingAreas')"><i class="material-icons">local_parking</i> Parking Areas</a>
@@ -40,30 +47,113 @@
 
         <div id="myBookings" class="content">
             <h2>My Bookings</h2>
-            <div id="loadingIndicator"></div>
-            <table>
+            <!-- Check-in Timer Section -->
+<div class="check-in-section">
+  <div id="booking-status"> Booked - Awaiting Check-In</div>
+
+  <div class="timer">
+    <strong>Time left to check in:</strong>
+    <span id="countdown">15:00</span>
+  </div>
+
+  <div class="check-in-buttons">
+    <button id="checkInButton" onclick="handleCheckInFromUI()">Check-In</button>
+    <button onclick="showTab('upcoming')">Upcoming</button>
+    <button onclick="showTab('active')">Active</button>
+    <button onclick="showTab('history')">History</button>
+    <button onclick="showTab('cancelled')">Cancelled</button>
+  </div>
+</div>
+
+          
+            <div id="loadingIndicator" style="display: none;">Loading...</div>
+          
+            <div id="upcoming" class="tab-content">
+              <table>
                 <thead>
-                    <tr>
-                        <th>Booking ID</th>
-                        <th>Parking Area</th>
-                        <th>Car Model</th>
-                        <th>Slot</th>
-                        <th>Time</th>
-                        <th>Booking Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Parking Area</th>
+                    <th>Car Model</th>
+                    <th>Slot</th>
+                    <th>Time</th>
+                    <th>Booking Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
                 </thead>
-                <tbody id="bookingTableBody">
-                    <!-- Booking data will be inserted here via JavaScript -->
-                </tbody>
-            </table>
-        </div>
+                <tbody id="upcomingBody"></tbody>
+              </table>
+            </div>
+          
+            <div id="active" class="tab-content" style="display:none;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Parking Area</th>
+                    <th>Car Model</th>
+                    <th>Slot</th>
+                    <th>Time</th>
+                    <th>Booking Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="activeBody"></tbody>
+              </table>
+            </div>
+            
+            
+          
+            <div id="history" class="tab-content" style="display:none;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Parking Area</th>
+                    <th>Car Model</th>
+                    <th>Slot</th>
+                    <th>Time</th>
+                    <th>Booking Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+              </table>
+            </div>
+            <div id="cancelled" class="tab-content" style="display:none;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Booking ID</th>
+                      <th>Parking Area</th>
+                      <th>Car Model</th>
+                      <th>Slot</th>
+                      <th>Time</th>
+                      <th>Booking Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cancelledBody"></tbody>
+                </table>
+              </div>
+          </div>
+          
         
 
         <div id="checkSlots" class="content">
             <h2>Check Slots</h2>
-            <p>Available slots:</p>
+            <p>Select Parking Area and Available Slots:</p>
+    <!-- Dropdown to select parking area -->
+    <label for="areaSelect">Select Parking Area:</label>
+    <select id="areaSelect">
+        <option value="" disabled selected>Select an Area</option> <!-- Default empty option -->
+        <option value="openArea">Open Area</option>
+        <option value="basementParking">Basement Parking</option>
+    </select>
             <table>
                 <tr>
                     <th>Slot ID</th>
@@ -84,17 +174,21 @@
         </div>
 
         <div id="bookingForm" class="content" style="display: none;">
+            <input type="text" id="selectedSlot" hidden>
+
             <h2>Book a Slot</h2>
             <form id="bookingFormDetails">
                 <label for="carModel">Car Model:</label>
                 <input type="text" id="carModel" required>
-                <label for="bookingTime">Time Slot:</label>
-                <input type="time" id="bookingTime" required>
+            
+                <label for="startTime">Start Time:</label>
+                <input type="time" id="startTime" required>
+                <label for="endTime">End Time:</label>
+                <input type="time" id="endTime" required>
+            
                 <button type="submit">Confirm Booking</button>
                 <p id="selectedSlotInfo" style="margin-top:10px; color: green;"></p>
             </form>
-            
-
         </div>
 
         <!-- FIXED: Parking Areas Section -->
@@ -125,17 +219,26 @@
     </div>
 
 
-        <div id="waitlist" class="content">
-            <h2>Waitlist</h2>
-            <input type="text" id="waitlistName" placeholder="Enter your name">
-            <button onclick="testAddToWaitlist()">Add to Waitlist</button>
-            <div id="waitlistdisplay">
-                <p>Users currently waiting for a slot will be displayed here.</p>
-            </div>
-            </div>
-        
-
-
+    <div id="waitlist" class="content">
+        <h2>Waitlist</h2>
+        <label for="waitlistArea">Select Parking Area:</label>
+    <select id="waitlistArea">
+        <option value="">-- Select Area --</option>
+       
+            <option value="Area 1">Basement parking</option>
+            <option value="Area 2">Open Area parking</option>
+            <option value="Area 3">VIP parking</option>
+        </select>
+        <br>
+        <input type="text" id="waitlistName" placeholder="Enter your name">
+        <input type="time" id="waitlistStartTime" placeholder="Start time">
+        <input type="time" id="waitlistEndTime" placeholder="End time">
+        <button onclick="testAddToWaitlist()">Add to Waitlist</button>
+        <div id="waitlistdisplay">
+            <p>Users currently waiting for a slot will be displayed here.</p>
+        </div>
+    </div>
+    
         <div id="notifications" class="content">
             <h2>Notifications</h2>
             <div id="notification-list"></div>
@@ -148,29 +251,43 @@
         
     
 
-    <!-- Feedback Modal -->
-    <div id="feedbackModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeFeedback()">&times;</span>
-            <h3>📝 Submit Feedback</h3>
-            <form id="feedbackForm">
-                <label for="rating">Rating:</label>
-                <select id="rating" name="rating" required>
-                    <option value="" disabled selected>Select Rating</option>
-                    <option value="5">⭐️⭐️⭐️⭐️⭐️ - Excellent</option>
-                    <option value="4">⭐️⭐️⭐️⭐️ - Good</option>
-                    <option value="3">⭐️⭐️⭐️ - Average</option>
-                    <option value="2">⭐️⭐️ - Poor</option>
-                    <option value="1">⭐️ - Terrible</option>
-                </select>
-
-                <label for="comments">Comments:</label>
-                <textarea id="comments" name="comments" rows="4" placeholder="Your thoughts..." required></textarea>
-
-                <button type="submit">Submit</button>
-            </form>
+        <div id="feedbackModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeFeedback()">&times;</span>
+                <h3>📝 Submit Feedback</h3>
+                <form id="feedbackForm">
+                    <!-- Rating Dropdown -->
+                    <label for="rating">Rating:</label>
+                    <select id="rating" name="rating" required>
+                        <option value="" disabled selected>Select Rating</option>
+                        <option value="5">Excellent</option>
+                        <option value="4">Good</option>
+                        <option value="3">Average</option>
+                        <option value="2">Poor</option>
+                        <option value="1">Terrible</option>
+                    </select>
+        
+                    <!-- Comments Section -->
+                    <label for="comments">Comments:</label>
+                    <textarea id="comments" name="comments" rows="4" placeholder="Your thoughts..." required></textarea>
+        
+                    <!-- Submit Button -->
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
+
+        <!-- Waitlist Modal -->
+<div id="waitlistModal" class="modal">
+  <div class="modal-content">
+    <h3>Check-In Missed</h3>
+    <p>Your booking has expired. Would you like to join the waitlist?</p>
+    <div class="modal-buttons">
+      <button id="joinWaitlistBtn">Yes</button>
+      <button id="closeModalBtn">No</button>
     </div>
+  </div>
+</div>
 
 
     <script src="consumer_dashboard.js"></script>
